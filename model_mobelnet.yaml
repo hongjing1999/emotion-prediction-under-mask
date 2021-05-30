@@ -1,0 +1,3782 @@
+backend: tensorflow
+class_name: Functional
+config:
+  input_layers:
+  - - input_1
+    - 0
+    - 0
+  layers:
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: InputLayer
+      config:
+        batch_input_shape: !!python/tuple
+        - null
+        - 128
+        - 99
+        - 3
+        dtype: float32
+        name: input_1
+        ragged: false
+        sparse: false
+      inbound_nodes: []
+      name: input_1
+    state:
+      object_id: 0
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 2
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: &id003 !!python/tuple
+        - 1
+        - 1
+        dtype: float32
+        filters: 32
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 1
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: &id004 !!python/tuple
+        - 3
+        - 3
+        name: conv1
+        padding: same
+        strides: &id007 !!python/tuple
+        - 2
+        - 2
+        trainable: false
+        use_bias: false
+      inbound_nodes:
+      - - - input_1
+          - 0
+          - 0
+          - {}
+      name: conv1
+    state:
+      object_id: 3
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 4
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 5
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 6
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 7
+            ref_count: 1
+        name: conv1_bn
+        scale: true
+        trainable: false
+      inbound_nodes:
+      - - - conv1
+          - 0
+          - 0
+          - {}
+      name: conv1_bn
+    state:
+      object_id: 8
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - &id001 !!python/name:numpy.ndarray ''
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - &id002 !!python/object/apply:numpy.dtype
+            args:
+            - f4
+            - false
+            - true
+            state: !!python/tuple
+            - 3
+            - <
+            - null
+            - null
+            - null
+            - -1
+            - -1
+            - 0
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv1_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: false
+      inbound_nodes:
+      - - - conv1_bn
+          - 0
+          - 0
+          - {}
+      name: conv1_relu
+    state:
+      object_id: 9
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 11
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 12
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_1
+        padding: same
+        strides: &id005 !!python/tuple
+        - 1
+        - 1
+        trainable: false
+        use_bias: false
+      inbound_nodes:
+      - - - conv1_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_1
+    state:
+      object_id: 13
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 14
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 15
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 16
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 17
+            ref_count: 1
+        name: conv_dw_1_bn
+        scale: true
+        trainable: false
+      inbound_nodes:
+      - - - conv_dw_1
+          - 0
+          - 0
+          - {}
+      name: conv_dw_1_bn
+    state:
+      object_id: 18
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_1_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: false
+      inbound_nodes:
+      - - - conv_dw_1_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_1_relu
+    state:
+      object_id: 19
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 21
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 64
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 20
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_1
+        padding: same
+        strides: *id005
+        trainable: false
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_1_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_1
+    state:
+      object_id: 22
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 23
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 24
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 25
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 26
+            ref_count: 1
+        name: conv_pw_1_bn
+        scale: true
+        trainable: false
+      inbound_nodes:
+      - - - conv_pw_1
+          - 0
+          - 0
+          - {}
+      name: conv_pw_1_bn
+    state:
+      object_id: 27
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_1_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: false
+      inbound_nodes:
+      - - - conv_pw_1_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_1_relu
+    state:
+      object_id: 28
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ZeroPadding2D
+      config:
+        data_format: channels_last
+        dtype: float32
+        name: conv_pad_2
+        padding: !!python/tuple
+        - &id006 !!python/tuple
+          - 0
+          - 1
+        - *id006
+        trainable: false
+      inbound_nodes:
+      - - - conv_pw_1_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pad_2
+    state:
+      object_id: 29
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 31
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 32
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_2
+        padding: valid
+        strides: *id007
+        trainable: false
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pad_2
+          - 0
+          - 0
+          - {}
+      name: conv_dw_2
+    state:
+      object_id: 33
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 34
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 35
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 36
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 37
+            ref_count: 1
+        name: conv_dw_2_bn
+        scale: true
+        trainable: false
+      inbound_nodes:
+      - - - conv_dw_2
+          - 0
+          - 0
+          - {}
+      name: conv_dw_2_bn
+    state:
+      object_id: 38
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_2_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: false
+      inbound_nodes:
+      - - - conv_dw_2_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_2_relu
+    state:
+      object_id: 39
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 41
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 128
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 40
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_2
+        padding: same
+        strides: *id005
+        trainable: false
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_2_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_2
+    state:
+      object_id: 42
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 43
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 44
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 45
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 46
+            ref_count: 1
+        name: conv_pw_2_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_2
+          - 0
+          - 0
+          - {}
+      name: conv_pw_2_bn
+    state:
+      object_id: 47
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_2_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_2_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_2_relu
+    state:
+      object_id: 48
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 50
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 51
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_3
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_2_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_3
+    state:
+      object_id: 52
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 53
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 54
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 55
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 56
+            ref_count: 1
+        name: conv_dw_3_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_3
+          - 0
+          - 0
+          - {}
+      name: conv_dw_3_bn
+    state:
+      object_id: 57
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_3_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_3_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_3_relu
+    state:
+      object_id: 58
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 60
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 128
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 59
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_3
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_3_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_3
+    state:
+      object_id: 61
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 62
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 63
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 64
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 65
+            ref_count: 1
+        name: conv_pw_3_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_3
+          - 0
+          - 0
+          - {}
+      name: conv_pw_3_bn
+    state:
+      object_id: 66
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_3_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_3_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_3_relu
+    state:
+      object_id: 67
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ZeroPadding2D
+      config:
+        data_format: channels_last
+        dtype: float32
+        name: conv_pad_4
+        padding: !!python/tuple
+        - *id006
+        - *id006
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_3_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pad_4
+    state:
+      object_id: 68
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 70
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 71
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_4
+        padding: valid
+        strides: *id007
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pad_4
+          - 0
+          - 0
+          - {}
+      name: conv_dw_4
+    state:
+      object_id: 72
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 73
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 74
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 75
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 76
+            ref_count: 1
+        name: conv_dw_4_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_4
+          - 0
+          - 0
+          - {}
+      name: conv_dw_4_bn
+    state:
+      object_id: 77
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_4_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_4_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_4_relu
+    state:
+      object_id: 78
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 80
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 256
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 79
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_4
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_4_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_4
+    state:
+      object_id: 81
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 82
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 83
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 84
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 85
+            ref_count: 1
+        name: conv_pw_4_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_4
+          - 0
+          - 0
+          - {}
+      name: conv_pw_4_bn
+    state:
+      object_id: 86
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_4_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_4_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_4_relu
+    state:
+      object_id: 87
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 89
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 90
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_5
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_4_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_5
+    state:
+      object_id: 91
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 92
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 93
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 94
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 95
+            ref_count: 1
+        name: conv_dw_5_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_5
+          - 0
+          - 0
+          - {}
+      name: conv_dw_5_bn
+    state:
+      object_id: 96
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_5_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_5_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_5_relu
+    state:
+      object_id: 97
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 99
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 256
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 98
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_5
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_5_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_5
+    state:
+      object_id: 100
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 101
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 102
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 103
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 104
+            ref_count: 1
+        name: conv_pw_5_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_5
+          - 0
+          - 0
+          - {}
+      name: conv_pw_5_bn
+    state:
+      object_id: 105
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_5_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_5_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_5_relu
+    state:
+      object_id: 106
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ZeroPadding2D
+      config:
+        data_format: channels_last
+        dtype: float32
+        name: conv_pad_6
+        padding: !!python/tuple
+        - *id006
+        - *id006
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_5_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pad_6
+    state:
+      object_id: 107
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 109
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 110
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_6
+        padding: valid
+        strides: *id007
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pad_6
+          - 0
+          - 0
+          - {}
+      name: conv_dw_6
+    state:
+      object_id: 111
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 112
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 113
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 114
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 115
+            ref_count: 1
+        name: conv_dw_6_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_6
+          - 0
+          - 0
+          - {}
+      name: conv_dw_6_bn
+    state:
+      object_id: 116
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_6_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_6_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_6_relu
+    state:
+      object_id: 117
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 119
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 512
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 118
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_6
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_6_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_6
+    state:
+      object_id: 120
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 121
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 122
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 123
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 124
+            ref_count: 1
+        name: conv_pw_6_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_6
+          - 0
+          - 0
+          - {}
+      name: conv_pw_6_bn
+    state:
+      object_id: 125
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_6_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_6_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_6_relu
+    state:
+      object_id: 126
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 128
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 129
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_7
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_6_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_7
+    state:
+      object_id: 130
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 131
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 132
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 133
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 134
+            ref_count: 1
+        name: conv_dw_7_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_7
+          - 0
+          - 0
+          - {}
+      name: conv_dw_7_bn
+    state:
+      object_id: 135
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_7_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_7_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_7_relu
+    state:
+      object_id: 136
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 138
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 512
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 137
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_7
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_7_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_7
+    state:
+      object_id: 139
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 140
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 141
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 142
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 143
+            ref_count: 1
+        name: conv_pw_7_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_7
+          - 0
+          - 0
+          - {}
+      name: conv_pw_7_bn
+    state:
+      object_id: 144
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_7_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_7_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_7_relu
+    state:
+      object_id: 145
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 147
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 148
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_8
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_7_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_8
+    state:
+      object_id: 149
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 150
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 151
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 152
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 153
+            ref_count: 1
+        name: conv_dw_8_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_8
+          - 0
+          - 0
+          - {}
+      name: conv_dw_8_bn
+    state:
+      object_id: 154
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_8_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_8_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_8_relu
+    state:
+      object_id: 155
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 157
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 512
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 156
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_8
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_8_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_8
+    state:
+      object_id: 158
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 159
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 160
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 161
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 162
+            ref_count: 1
+        name: conv_pw_8_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_8
+          - 0
+          - 0
+          - {}
+      name: conv_pw_8_bn
+    state:
+      object_id: 163
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_8_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_8_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_8_relu
+    state:
+      object_id: 164
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 166
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 167
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_9
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_8_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_9
+    state:
+      object_id: 168
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 169
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 170
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 171
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 172
+            ref_count: 1
+        name: conv_dw_9_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_9
+          - 0
+          - 0
+          - {}
+      name: conv_dw_9_bn
+    state:
+      object_id: 173
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_9_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_9_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_9_relu
+    state:
+      object_id: 174
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 176
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 512
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 175
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_9
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_9_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_9
+    state:
+      object_id: 177
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 178
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 179
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 180
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 181
+            ref_count: 1
+        name: conv_pw_9_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_9
+          - 0
+          - 0
+          - {}
+      name: conv_pw_9_bn
+    state:
+      object_id: 182
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_9_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_9_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_9_relu
+    state:
+      object_id: 183
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 185
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 186
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_10
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_9_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_10
+    state:
+      object_id: 187
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 188
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 189
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 190
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 191
+            ref_count: 1
+        name: conv_dw_10_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_10
+          - 0
+          - 0
+          - {}
+      name: conv_dw_10_bn
+    state:
+      object_id: 192
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_10_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_10_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_10_relu
+    state:
+      object_id: 193
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 195
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 512
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 194
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_10
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_10_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_10
+    state:
+      object_id: 196
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 197
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 198
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 199
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 200
+            ref_count: 1
+        name: conv_pw_10_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_10
+          - 0
+          - 0
+          - {}
+      name: conv_pw_10_bn
+    state:
+      object_id: 201
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_10_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_10_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_10_relu
+    state:
+      object_id: 202
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: DepthwiseConv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 204
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        depth_multiplier: 1
+        depthwise_constraint: null
+        depthwise_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 205
+            ref_count: 1
+        depthwise_regularizer: null
+        dilation_rate: *id003
+        dtype: float32
+        groups: 1
+        kernel_size: *id004
+        name: conv_dw_11
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_pw_10_relu
+          - 0
+          - 0
+          - {}
+      name: conv_dw_11
+    state:
+      object_id: 206
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 207
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 208
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 209
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 210
+            ref_count: 1
+        name: conv_dw_11_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_11
+          - 0
+          - 0
+          - {}
+      name: conv_dw_11_bn
+    state:
+      object_id: 211
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_dw_11_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_dw_11_bn
+          - 0
+          - 0
+          - {}
+      name: conv_dw_11_relu
+    state:
+      object_id: 212
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Conv2D
+      config:
+        activation: linear
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 214
+            ref_count: 1
+        bias_regularizer: null
+        data_format: channels_last
+        dilation_rate: *id003
+        dtype: float32
+        filters: 512
+        groups: 1
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 213
+            ref_count: 1
+        kernel_regularizer: null
+        kernel_size: *id005
+        name: conv_pw_11
+        padding: same
+        strides: *id005
+        trainable: true
+        use_bias: false
+      inbound_nodes:
+      - - - conv_dw_11_relu
+          - 0
+          - 0
+          - {}
+      name: conv_pw_11
+    state:
+      object_id: 215
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: BatchNormalization
+      config:
+        axis: !!python/object/apply:tensorflow.python.training.tracking.data_structures.ListWrapper
+        - - 3
+        beta_constraint: null
+        beta_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 216
+            ref_count: 1
+        beta_regularizer: null
+        center: true
+        dtype: float32
+        epsilon: 0.001
+        gamma_constraint: null
+        gamma_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 217
+            ref_count: 1
+        gamma_regularizer: null
+        momentum: 0.99
+        moving_mean_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 218
+            ref_count: 1
+        moving_variance_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Ones
+            config: {}
+          state:
+            object_id: 219
+            ref_count: 1
+        name: conv_pw_11_bn
+        scale: true
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_11
+          - 0
+          - 0
+          - {}
+      name: conv_pw_11_bn
+    state:
+      object_id: 220
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: ReLU
+      config:
+        dtype: float32
+        max_value: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AADAQA==
+        name: conv_pw_11_relu
+        negative_slope: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        threshold: !!python/object/apply:numpy.core.multiarray._reconstruct
+          args:
+          - *id001
+          - !!python/tuple
+            - 0
+          - !!binary |
+            Yg==
+          state: !!python/tuple
+          - 1
+          - !!python/tuple []
+          - *id002
+          - false
+          - !!binary |
+            AAAAAA==
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_11_bn
+          - 0
+          - 0
+          - {}
+      name: conv_pw_11_relu
+    state:
+      object_id: 221
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: GlobalMaxPooling2D
+      config:
+        data_format: channels_last
+        dtype: float32
+        name: global_pool
+        trainable: true
+      inbound_nodes:
+      - - - conv_pw_11_relu
+          - 0
+          - 0
+          - {}
+      name: global_pool
+    state:
+      object_id: 222
+      ref_count: 1
+  - !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+    dictitems:
+      class_name: Dense
+      config:
+        activation: softmax
+        activity_regularizer: null
+        bias_constraint: null
+        bias_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: Zeros
+            config: {}
+          state:
+            object_id: 224
+            ref_count: 1
+        bias_regularizer: null
+        dtype: float32
+        kernel_constraint: null
+        kernel_initializer: !!python/object/new:tensorflow.python.keras.utils.generic_utils.SharedObjectConfig
+          dictitems:
+            class_name: GlorotUniform
+            config:
+              seed: null
+          state:
+            object_id: 223
+            ref_count: 1
+        kernel_regularizer: null
+        name: out_layer
+        trainable: true
+        units: 3
+        use_bias: true
+      inbound_nodes:
+      - - - global_pool
+          - 0
+          - 0
+          - {}
+      name: out_layer
+    state:
+      object_id: 225
+      ref_count: 1
+  name: model
+  output_layers:
+  - - out_layer
+    - 0
+    - 0
+keras_version: 2.5.0
